@@ -2,6 +2,7 @@ package fr.gtm.compteur.servlet;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
@@ -20,13 +21,14 @@ import fr.gtm.compteur.Compteur;
 @WebServlet("/CompteurServlet2")
 public class CompteurServlet2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	@Inject private Compteur compteur;
        
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		Compteur compteur = (Compteur) session.getAttribute("compteur");
-		
+
 		compteur.incrementer();
+		//On remet le setAttribute
+		request.getSession().setAttribute("compteur", compteur);
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
 		rd.forward(request, response);	
 		

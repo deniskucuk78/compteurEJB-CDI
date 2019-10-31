@@ -8,9 +8,16 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
+import javax.enterprise.context.SessionScoped;
 
-@Stateful
-@StatefulTimeout(unit = TimeUnit.MINUTES, value = 10)
+
+
+
+//on enleve : @Stateful
+//on enleve :  @StatefulTimeout(unit = TimeUnit.MINUTES, value = 10)
+//On remplace le tout par @SessionScoped et on ajoute Serializable (car en EJB simple cela fonctionnait meme sans le @Serializable) :
+
+@SessionScoped
 public class Compteur {
 	private int value;
 	private static final Logger LOG = Logger.getLogger("demo");

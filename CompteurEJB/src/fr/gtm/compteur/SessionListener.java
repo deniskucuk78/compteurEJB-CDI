@@ -35,14 +35,6 @@ public class SessionListener implements HttpSessionListener {
          session.setMaxInactiveInterval(60*1);
          LOG.info(">>> création de la session : "+session.getId());
          
-         try {
-			InitialContext ctx = new InitialContext();
-			Compteur compteur = (Compteur) ctx.lookup("java:app/CompteurEJB/Compteur");
-			session.setAttribute("compteur", compteur);
-		} catch (NamingException e) {
-			LOG.log(Level.SEVERE, "Erreur de création de session",e);
-		}
-         
     }
 
 	/**
